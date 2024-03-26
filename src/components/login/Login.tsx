@@ -118,7 +118,7 @@ const Login = () => {
                         <div className="form-outline mb-4">
                           <div className="d-flex h-100 w-100 justify-content-center align-item-center p-5 position-relative z-index-3">
                             <Image
-                              src={LOGO_SRC}
+                              src={"/logo.png"}
                               width={250}
                               height={30}
                               alt={"logo"}
