@@ -1,9 +1,9 @@
-import react, {useEffect, useState} from "react";
-import {RootState} from "@/redux/store";
-import {useDispatch, useSelector} from "react-redux";
-import Filter, {PROPERTY_FOR, PROPERTY_TYPE} from "../Utils/Filter";
-import {DDMMYYYY} from "../Utils/Formeter";
-import CustomTable, {ActionButtons, ActionSwitch} from "../Utils/CustomTable";
+import react, { useEffect, useState } from "react";
+import { RootState } from "@/redux/store";
+import { useDispatch, useSelector } from "react-redux";
+import Filter, { PROPERTY_FOR, PROPERTY_TYPE } from "../Utils/Filter";
+import { DDMMYYYY } from "../Utils/Formeter";
+import CustomTable, { ActionButtons, ActionSwitch } from "../Utils/CustomTable";
 import Image from "next/image";
 import Pagination from "../Utils/Pagination";
 import React from "react";
@@ -13,16 +13,26 @@ import {
   PAGE_TYPE_ADD,
   PAGE_TYPE_EDIT,
 } from "../Utils/constants";
-import TableHeader, {FIRST_BUTTON, SECOND_BUTTON} from "../Utils/CustomTable/TableHeader";
+import TableHeader, {
+  FIRST_BUTTON,
+  SECOND_BUTTON,
+} from "../Utils/CustomTable/TableHeader";
 import ActionFeature from "@/Api/ActionFeature";
 import ActionScreen from "./ActionScreen";
-import {FaBuildingUser} from "react-icons/fa6";
-import {useRouter} from "next/router";
+import { FaBuildingUser } from "react-icons/fa6";
+import { useRouter } from "next/router";
 
-const order_by_option = ["first_name", "last_name", "email", "role", "zip_code", "state", "city"]
+const order_by_option = [
+  "first_name",
+  "last_name",
+  "email",
+  "role",
+  "zip_code",
+  "state",
+  "city",
+];
 
-
-export const UserName: React.FC<any> = ({data}) => (
+export const UserName: React.FC<any> = ({ data }) => (
   <div className="d-flex px-2 py-1">
     <div>
       <Image
@@ -34,7 +44,9 @@ export const UserName: React.FC<any> = ({data}) => (
       />
     </div>
     <div className="text-left">
-      <h6 className="text-left">{`${data.first_name || ""} ${data.last_name || ""}`}</h6>
+      <h6 className="text-left">{`${data.first_name || ""} ${
+        data.last_name || ""
+      }`}</h6>
       <p className="text-left text-xs text-secondary mb-0">{`${data.email}`}</p>
     </div>
   </div>
@@ -49,9 +61,9 @@ const Users = () => {
 
   // hooks
   const dispatch = useDispatch();
-  const router = useRouter()
+  const router = useRouter();
   const token = useSelector((state: RootState) => state.login.userToken?.token);
-  const {recallApi} = useSelector((state: RootState) => state.recallApi);
+  const { recallApi } = useSelector((state: RootState) => state.recallApi);
 
   // status
   const [filter, setFilter] = useState(INIT_FILTER);
@@ -62,7 +74,6 @@ const Users = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [selected, setSelected] = useState<userType>({});
   const [actionType, setActionType] = useState<string>("");
-
 
   // useEffects
   useEffect(() => {
@@ -82,63 +93,44 @@ const Users = () => {
     },
     {
       value: "Address",
-      component: ({data}) => <>{`${data.city || ""} ${data.state || ""} ${data.zip_code || ""}`}</>,
+      key: "address",
     },
     {
-      key: "contact_number",
+      key: "phone_number",
       value: "Phone Number",
     },
 
     {
       value: "Role",
-      component: ({data}) => {
-        return (
-          <>
-            {data.role} </>
-        );
+      component: ({ data }) => {
+        return <>{data.role} </>;
       },
-    }, {
+    },
+    {
       value: "Created At",
-      component: ({data}) => <>{DDMMYYYY(data.createdAt)}</>,
+      component: ({ data }) => <>{DDMMYYYY(data.created_at)}</>,
     },
     {
       value: "Status",
       combine: ["is_active"],
-      component: ({data}) => (
-        <ActionSwitch
-          data={data}
-        />
-      ),
+      component: ({ data }) => <ActionSwitch data={data} />,
     },
     {
       value: "Action",
       combine: ["user_id"],
-      component: ({data}) => (
+      component: ({ data }) => (
         <>
-          <>
-            <button
-              onClick={() => {
-                router.push(`property/add/?id=${data._id}&name=${data.first_name + ' ' + data?.last_name}`)
-              }}
-              className="btn btn-success"
-              data-tooltip="Add Property"
-            >
-              <FaBuildingUser size={16} />
-            </button>
-            &nbsp;
-          </>
           <ActionButtons
             data={data}
             setSelected={setSelected}
             setEdit={setActionType}
             id={data._id}
-          /></>
+          />
+        </>
       ),
       className: "d-flex ",
     },
   ];
-
-
 
   return (
     <>
@@ -149,7 +141,7 @@ const Users = () => {
             actionType === PAGE_TYPE_ADD || actionType === PAGE_TYPE_EDIT
           }
           onClose={setActionType}
-          data={{...selected, id: selected.user_id}}
+          data={{ ...selected, id: selected.user_id }}
           type={actionType == PAGE_TYPE_ADD ? PAGE_TYPE_ADD : PAGE_TYPE_EDIT}
           urls={
             actionType == PAGE_TYPE_ADD ? `${path}/signUp` : `${path}/update`
@@ -157,7 +149,7 @@ const Users = () => {
           path={path}
         />
       )}
-      <div className="card bg-glass" style={{overflowX: "hidden"}}>
+      <div className="card bg-glass" style={{ overflowX: "hidden" }}>
         <div className="card-datatable ">
           <div className="dataTables_wrapper dt-bootstrap5">
             <TableHeader
@@ -168,7 +160,12 @@ const Users = () => {
               }}
               disable={[FIRST_BUTTON]}
             />
-            <Filter filter={filter} setFilter={setFilter} disable={[PROPERTY_TYPE, PROPERTY_FOR]} orderBy={order_by_option} />
+            <Filter
+              filter={filter}
+              setFilter={setFilter}
+              disable={[PROPERTY_TYPE, PROPERTY_FOR]}
+              orderBy={order_by_option}
+            />
 
             <CustomTable
               tableCustomize={TableCustomize}

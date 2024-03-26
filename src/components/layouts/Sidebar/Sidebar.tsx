@@ -32,7 +32,8 @@ import {
   company_name,
 } from "@/components/Utils/constants";
 import { CiLogout } from "react-icons/ci";
-import { FaHeart, FaImage } from "react-icons/fa";
+import { removeToken } from "@/redux/reducer/login";
+import { googleLogout } from "@react-oauth/google";
 
 let navigation = [
   {
@@ -47,44 +48,12 @@ let navigation = [
     href: "/leads",
     icon: <MdTouchApp style={{ fontSize: "1.5rem", color: "#d48869" }} />,
   },
-  // {
-  //   id: 2,
-  //   title: "Interested",
-  //   href: "/interested",
-  //   icon: <FaHeart style={{fontSize: "1rem", color: "#f5464e"}} />,
-  // },
   {
     id: 3,
     title: "Partners",
     href: "/partners",
-    icon: <FaUserPlus style={{ fontSize: "1rem", color: "#106FFB" }} />,
+    icon: <FaUserPlus style={{ fontSize: "1.2rem", color: "#106FFB" }} />,
   },
-  // {
-  //   id: 4,
-  //   title: "Property",
-  //   href: "/property",
-  //   icon: <MdHomeWork style={{fontSize: "1rem", color: "#000100"}} />,
-  // },
-  // {
-  //   id: 5,
-  //   title: "Setting",
-  //   href: "/setting/phone",
-  //   icon: <IoSettings style={{fontSize: "1.1rem", color: "#FB6340"}} />,
-  //   subMenu: [
-  //     {
-  //       ids: 1,
-  //       title: "Phone Number",
-  //       href: "/setting/phone",
-  //       icon: <IoCall style={{fontSize: "1rem", color: "FF55BB"}} />,
-  //     },
-  //   ],
-  // },
-  // {
-  //   id: 6,
-  //   title: "Users",
-  //   href: "/users",
-  //   icon: <FaUserPlus style={{fontSize: "1.1rem", color: "#106FFB"}} />,
-  // },
 ];
 
 const Sidebar = () => {
@@ -113,29 +82,10 @@ const Sidebar = () => {
     };
   }, []);
 
-  // useEffect(() => {
-  //   console.log(navigation[5]?.id)
-  //   if (role === 'broker' && navigation[5]?.id == 5) {
-  //     navigation.splice(5, 1)
-  //   }
-  //   if (role !== 'broker' && navigation[5]?.id !== 5) {
-  //     navigation.splice(5, 0, {
-  //       id: 5,
-  //       title: "Setting",
-  //       href: "/setting/phone",
-  //       icon: <IoSettings style={{fontSize: "1.1rem", color: "#FB6340"}} />,
-  //       subMenu: [
-  //         {
-  //           ids: 1,
-  //           title: "Phone Number",
-  //           href: "/setting/phone",
-  //           icon: <IoCall style={{fontSize: "1rem", color: "FF55BB"}} />,
-  //         },
-  //       ],
-  //     })
-
-  //   }
-  // }, [role])
+  const onLogOut = () => {
+    dispatch(removeToken());
+    googleLogout();
+  };
 
   return (
     <aside className="sidenav bg-glass navbar navbar-vertical navbar-expand-xs border-0 fixed-start overflow-hidden">
@@ -164,7 +114,7 @@ const Sidebar = () => {
         </a>
       </div>
       <hr className="horizontal dark mt-0" />
-      <ul className="navbar-nav overflow-auto side_Nav_container">
+      <ul className="navbar-nav side  side_Nav_container">
         {navigation.map((nav: any, index) => {
           if (nav.label)
             return (
@@ -182,11 +132,12 @@ const Sidebar = () => {
                     className={`nav-link ${path === nav.href ? "active" : ""}`}
                     href={nav.href}
                   >
-                    <div className="icon icon-shape icon-md border-radius-md text-center me-2 d-flex align-items-center justify-content-center opacity-10">
+                    <div className="icon icon-shape icon-md border-radius-md text-center me-4 d-flex align-items-center justify-content-center opacity-10">
                       {nav.icon}
                     </div>
+                    &nbsp;
                     <span
-                      className="nav-link-text ms-3"
+                      className="nav-link-text ms-4"
                       style={{ fontSize: "0.9rem" }}
                     >
                       {nav.title}
@@ -247,7 +198,7 @@ const Sidebar = () => {
                       }`}
                       //   onClick={() => setActiveItem(index)}
                     >
-                      <div className="icon icon-shape icon-md border-radius-md text-center me-2 d-flex align-items-center justify-content-center opacity-10">
+                      <div className="icon icon-shape icon-md border-radius-md text-center me-4 d-flex align-items-center justify-content-center opacity-10">
                         {nav.icon}
                       </div>
                       <span className="ms-3 d-inline-block">{nav.title}</span>
@@ -263,7 +214,12 @@ const Sidebar = () => {
         className="sidenav-footer position-fixed w-100 fixed-bottom p-2"
         style={{ backgroundColor: "#1c2a4221" }}
       >
-        <div className="nav-link d-flex justify-content-start align-items-center">
+        <div
+          className="nav-link d-flex justify-content-start align-items-center"
+          onClick={() => {
+            onLogOut();
+          }}
+        >
           <span>
             <CiLogout
               size={25}
@@ -271,7 +227,7 @@ const Sidebar = () => {
             />
           </span>
           <span
-            className="nav-link-text ms-4 text-uppercase font-weight-bold active user-select-none"
+            className="nav-link-text ms-5 text-uppercase font-weight-bold active user-select-none"
             style={{ fontSize: "0.9rem" }}
           >
             logOut
