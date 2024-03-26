@@ -150,7 +150,7 @@ const Sidebar = () => {
         )}
         <a className="navbar-brand m-0" target="_blank">
           <Image
-            src={""}
+            src={"/logo.png"}
             alt="github Logo"
             width={80}
             height={40}
