@@ -454,3 +454,27 @@ p {
   border: 1px solid var(--bs-primary);
   background-color: #e0e8f2c2;
 }
+
+.g-sidenav-hidden .navbar-vertical .fullLogo {
+  display: none;
+}
+.g-sidenav-hidden .navbar-vertical:hover .fullLogo {
+  display: block;
+}
+.g-sidenav-hidden .navbar-vertical:hover .halfLogo {
+  display: none;
+}
+.g-sidenav-pinned .navbar-vertical .halfLogo {
+  display: none;
+}
+.g-sidenav-hidden .navbar-vertical .halfLogo {
+  display: block;
+}
+.g-sidenav-pinned .sidenav .navbar-brand,
+.g-sidenav-hidden .sidenav .navbar-brand {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0 0;
+  height: 100%;
+}

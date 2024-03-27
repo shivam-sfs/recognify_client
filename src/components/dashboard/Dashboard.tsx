@@ -149,7 +149,7 @@ const Dashboard = () => {
                     </h5>
                     <p className="mb-0">
                       <span className=" text-sm font-weight-bolder">
-                        {dashboard?.work_total_in_progress} Works completed
+                        {dashboard?.work_total_in_completed} Works completed
                       </span>{" "}
                       since last Months
                     </p>

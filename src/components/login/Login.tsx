@@ -13,6 +13,7 @@ import { FaRegEye, FaRegEyeSlash } from "react-icons/fa";
 import ForgotPassword from "./ForgotPassword";
 import OtpVerify from "./OtpVerify";
 import ConfirmPassword from "./ConfirmPassword";
+import logo from "../../../public/logo.png"
 import {
   CONFIRM_PASSWORD_PAGE,
   FORGOT_PASSWORD_PAGE,
@@ -116,11 +117,11 @@ const Login = () => {
                     {() => (
                       <Form>
                         <div className="form-outline mb-4">
-                          <div className="d-flex h-100 w-100 justify-content-center align-item-center p-5 position-relative z-index-3">
+                          <div className="d-flex h-100 w-100 justify-content-center align-item-center p-5 mb-3 position-relative z-index-3">
                             <Image
-                              src={"/logo.png"}
-                              width={250}
-                              height={30}
+                              src={logo}
+                              width={300}
+                              height={45}
                               alt={"logo"}
                               className="object-fit-contain"
                             />

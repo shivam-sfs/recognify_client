@@ -34,6 +34,8 @@ import {
 import { CiLogout } from "react-icons/ci";
 import { removeToken } from "@/redux/reducer/login";
 import { googleLogout } from "@react-oauth/google";
+import logo from "../../../../public/logo.png"
+import halfLogo from "../../../../public/halfLogo.png"
 
 let navigation = [
   {
@@ -100,11 +102,18 @@ const Sidebar = () => {
         )}
         <a className="navbar-brand m-0" target="_blank">
           <Image
-            src={"/logo.png"}
-            alt="github Logo"
-            width={80}
-            height={40}
-            className="object-fit-contain"
+            src={logo}
+            alt="recognify"
+            width={300}
+            height={300}
+            className="object-fit-contain fullLogo"
+          />
+          <Image
+            src={halfLogo}
+            alt="recognify"
+            width={300}
+            height={300}
+            className="object-fit-contain halfLogo"
           />
           {COMPANY_NAME_SHOW && (
             <span className="ms-1 font-weight-bold text-uppercase">
