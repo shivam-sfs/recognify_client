@@ -1,30 +1,51 @@
-import {FaCoins, FaGlobe, FaShoppingCart} from "react-icons/fa";
-import {AiFillHdd} from "react-icons/ai";
+import { FaCoins, FaGlobe, FaShoppingCart } from "react-icons/fa";
+import { AiFillHdd } from "react-icons/ai";
 import Chart from "./Chart/Chart";
 import Corousel from "./carousel/Carousel";
 import Link from "next/link";
-import {BsFillPostcardHeartFill} from "react-icons/bs";
+import { BsFillPostcardHeartFill } from "react-icons/bs";
+import { useEffect, useState } from "react";
+import ActionFeature from "@/Api/ActionFeature";
+import { INIT_FILTER } from "../Utils/constants";
+import { useSelector } from "react-redux";
+import { RootState } from "@/redux/store";
 
 const Dashboard = () => {
+  const [dashboard, setDashboard] = useState<any>({});
+  const token = useSelector((state: RootState) => state.login.userToken?.token);
+  const { recallApi } = useSelector((state: RootState) => state.recallApi);
+  const path = "dashboard";
+
+  console.log(dashboard);
+  //   // configure
+  ActionFeature.path = path;
+
+  useEffect(() => {
+    ActionFeature.get(1, INIT_FILTER, setDashboard);
+    return () => {};
+  }, [recallApi, token]);
+
   return (
     <div className="container-fluid py-4">
       <div className="row">
         <div className="col-xl-3 col-sm-6 mb-xl-0 mb-4">
-          <div className="card bg-glass">
+          <div className="card  ">
             <div className="card-body p-3">
               <div className="row">
                 <div className="col-8">
-                  <Link href="/post" style={{color: "#000"}}>
+                  <Link href="/post" style={{ color: "#000" }}>
                     <div className="numbers">
                       <p className="text-sm mb-0 text-uppercase font-weight-bold">
-                        Resent Post
+                        Total hire lead
                       </p>
-                      <h5 className="font-weight-bolder">$53,000</h5>
+                      <h5 className="font-weight-bolder">
+                        {dashboard?.total_hire}
+                      </h5>
                       <p className="mb-0">
                         <span className="text-success text-sm font-weight-bolder">
-                          100 Units
+                          {dashboard?.total_hire} hire leads{" "}
                         </span>
-                        &nbsp;this month In
+                        since last Months
                       </p>
                     </div>
                   </Link>
@@ -45,20 +66,22 @@ const Dashboard = () => {
           </div>
         </div>
         <div className="col-xl-3 col-sm-6 mb-xl-0 mb-4">
-          <div className="card bg-glass">
+          <div className="card  ">
             <div className="card-body p-3">
               <div className="row">
                 <div className="col-8">
                   <div className="numbers">
                     <p className="text-sm mb-0 text-uppercase font-weight-bold">
-                      Total Property
+                      Total join lead
                     </p>
-                    <h5 className="font-weight-bolder">2,300</h5>
+                    <h5 className="font-weight-bolder">
+                      {dashboard?.total_join}
+                    </h5>
                     <p className="mb-0">
                       <span className="text-success text-sm font-weight-bolder">
-                        80 Units{' '}
+                        {dashboard?.total_join} join leads{" "}
                       </span>
-                      since last week
+                      since last Months
                     </p>
                   </div>
                 </div>
@@ -78,20 +101,22 @@ const Dashboard = () => {
           </div>
         </div>
         <div className="col-xl-3 col-sm-6 mb-xl-0 mb-4">
-          <div className="card bg-glass">
+          <div className="card  ">
             <div className="card-body p-3">
               <div className="row">
                 <div className="col-8">
                   <div className="numbers">
                     <p className="text-sm mb-0 text-uppercase font-weight-bold">
-                      About to Expire
+                      work in progress
                     </p>
-                    <h5 className="font-weight-bolder">+3,462</h5>
+                    <h5 className="font-weight-bolder">
+                      {dashboard?.work_total_in_progress}
+                    </h5>
                     <p className="mb-0">
                       <span className="text-danger text-sm font-weight-bolder">
-                        10 Units{' '}
+                        {dashboard?.work_total_in_progress} Works in Progress{" "}
                       </span>
-                      since last quarter
+                      since last Months
                     </p>
                   </div>
                 </div>
@@ -111,20 +136,22 @@ const Dashboard = () => {
           </div>
         </div>
         <div className="col-xl-3 col-sm-6 mb-xl-0 mb-4">
-          <div className="card bg-glass">
+          <div className="card  ">
             <div className="card-body p-3">
               <div className="row">
                 <div className="col-8">
                   <div className="numbers">
                     <p className="text-sm mb-0 text-uppercase font-weight-bold">
-                      Low Stock Levels{" "}
+                      completed Works
                     </p>
-                    <h5 className="font-weight-bolder">$103,430</h5>
+                    <h5 className="font-weight-bolder">
+                      {dashboard?.work_total_in_completed}
+                    </h5>
                     <p className="mb-0">
-                      <span className="text-success text-sm font-weight-bolder">
-                        20 Units
+                      <span className=" text-sm font-weight-bolder">
+                        {dashboard?.work_total_in_progress} Works completed
                       </span>{" "}
-                      than last month
+                      since last Months
                     </p>
                   </div>
                 </div>
@@ -145,7 +172,11 @@ const Dashboard = () => {
         </div>
       </div>
       <div className="row mt-4">
-        <Chart />
+        <Chart
+          labels={dashboard?.chart?.labels}
+          data={dashboard?.chart?.leads}
+          total={dashboard?.total_join + dashboard?.total_hire}
+        />
         <Corousel />
       </div>
     </div>

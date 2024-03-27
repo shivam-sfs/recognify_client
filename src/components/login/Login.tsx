@@ -185,14 +185,14 @@ const Login = () => {
                             Remember me
                           </span>
                         </label>
-                        <label className="mt-4  d-flex flex-row-reverse">
+                        {/* <label className="mt-4  d-flex flex-row-reverse">
                           <span
                             className="sign__in__checkbox__text"
                             onClick={() => setActionType(FORGOT_PASSWORD_PAGE)}
                           >
                             Forgot password
                           </span>
-                        </label>
+                        </label> */}
                         <div className="d-flex justify-content-center">
                           <button
                             type="submit"
@@ -203,7 +203,7 @@ const Login = () => {
                         </div>
 
                         <div className="d-flex justify-content-center">
-                          <GoogleLogin
+                          {/* <GoogleLogin
                             onSuccess={(credentialResponse) => {
                               console.log(credentialResponse);
                               getGoogleData(credentialResponse.credential);
@@ -211,7 +211,7 @@ const Login = () => {
                             onError={() => {
                               console.log("Login Failed");
                             }}
-                          />
+                          /> */}
                         </div>
                       </Form>
                     )}

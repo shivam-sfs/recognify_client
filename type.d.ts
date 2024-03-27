@@ -70,7 +70,7 @@ interface FilterDataType {
   limit: number;
   startDate: Date | string;
   endDate: Date | string;
-  search: string;
+  searchParam: string;
   orderBy: string | undefined;
   order: string | undefined;
   property_type?: string | undefined;

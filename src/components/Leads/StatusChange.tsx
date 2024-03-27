@@ -14,12 +14,14 @@ import { removeToken } from "@/redux/reducer/login";
 const StatusChange = ({ data }: any) => {
   const dispatch = useDispatch();
   const router = useRouter();
-  const token = useSelector((state: RootState) => state.login.userToken?.token);
+  const token = useSelector(
+    (state: RootState) => state?.login?.userToken?.token
+  );
   const Base_url = process.env.NEXT_PUBLIC_BASE_URL || "";
 
   const [admin_status, setAdmin_status] = useState(data?.status || "");
   const recallApi = useSelector(
-    (state: RootState) => state.recallApi.recallApi
+    (state: RootState) => state?.recallApi?.recallApi
   );
 
   return (

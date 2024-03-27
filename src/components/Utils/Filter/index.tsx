@@ -44,7 +44,7 @@ const Index = (props: filter) => {
       () => {
         setFilter((pre: object) => ({
           ...pre,
-          search: value,
+          searchParam: value,
         }));
       },
       DEBOUNCE_THRESHOLD,
@@ -259,11 +259,11 @@ const Index = (props: filter) => {
                 </option>
                 <option
                   value={
-                    "createdAt"
+                    "created_at"
                   }
                   selected={
                     filter.orderBy ===
-                    'createdAt'
+                    'created_at'
                   }
                 >
                   TIME

@@ -1,7 +1,7 @@
 import react, { useEffect, useState } from "react";
 import { RootState } from "@/redux/store";
 import { useDispatch, useSelector } from "react-redux";
-import Filter, { PROPERTY_FOR, PROPERTY_TYPE } from "../Utils/Filter";
+import Filter, { FILTER, PROPERTY_FOR, PROPERTY_TYPE } from "../Utils/Filter";
 import { DDMMYYYY } from "../Utils/Formeter";
 import CustomTable, { ActionButtons, DELETE } from "../Utils/CustomTable";
 import Pagination from "../Utils/Pagination";
@@ -192,7 +192,7 @@ const Interaction = () => {
             <Filter
               filter={filter}
               setFilter={setFilter}
-              disable={[PROPERTY_FOR, PROPERTY_TYPE]}
+              disable={[PROPERTY_FOR, PROPERTY_TYPE,FILTER]}
               orderBy={order_by_option}
             />
 
@@ -233,9 +233,9 @@ const Interaction = () => {
                     <>
                       <Accordion
                         defaultActiveKey="1"
-                        className="mt-3 mx-3 my-1"
+                        className="initialism mt-3 mx-3 my-1"
                       >
-                        <Accordion.Item eventKey="0">
+                        <Accordion.Item eventKey="0" >
                           <Accordion.Header>
                             <div className="row w-100">
                               <div

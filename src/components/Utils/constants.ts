@@ -65,7 +65,7 @@ export const INIT_FILTER = {
     limit: 5,
     startDate: "",
     endDate: "",
-    search: "",
+    searchParam: "",
     orderBy: "",
     order: "",
 };

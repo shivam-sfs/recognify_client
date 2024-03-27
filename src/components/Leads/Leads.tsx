@@ -1,7 +1,7 @@
 import react, { useEffect, useState } from "react";
 import { RootState } from "@/redux/store";
 import { useDispatch, useSelector } from "react-redux";
-import Filter, { PROPERTY_FOR, PROPERTY_TYPE } from "../Utils/Filter";
+import Filter, { FILTER, PROPERTY_FOR, PROPERTY_TYPE } from "../Utils/Filter";
 import CustomTable from "../Utils/CustomTable";
 import Image from "next/image";
 import Pagination from "../Utils/Pagination";
@@ -14,14 +14,7 @@ import TableHeader, {
 import ActionFeature from "@/Api/ActionFeature";
 import StatusChange from "./StatusChange";
 
-const order_by_option = [
-  "name",
-  "email",
-  "number",
-  "message",
-  "type",
-  "status",
-];
+const order_by_option = ["name", "email", "message", "type", "status"];
 
 export const UserName: React.FC<any> = ({ data }) => (
   <div className="d-flex px-2 py-1">
@@ -56,7 +49,7 @@ const Leads = () => {
   // status
   const [filter, setFilter] = useState(INIT_FILTER);
   const [fetchData, setFetchData] = useState({
-    list: [{ shgf: "fg" }],
+    list: [],
     pagination: { total: 0 },
   });
   const [currentPage, setCurrentPage] = useState(1);
@@ -93,7 +86,8 @@ const Leads = () => {
     },
     {
       value: "status",
-      component: StatusChange,
+      component: ({ data }) =>
+        data?.type == 1 ? <StatusChange data={data} token={token} /> : "",
     },
   ];
 
@@ -127,7 +121,7 @@ const Leads = () => {
               filter={filter}
               setFilter={setFilter}
               orderBy={order_by_option}
-              disable={[PROPERTY_FOR, PROPERTY_TYPE]}
+              disable={[PROPERTY_FOR, PROPERTY_TYPE,FILTER]}
             />
 
             <CustomTable
