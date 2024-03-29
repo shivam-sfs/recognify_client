@@ -1,6 +1,7 @@
 import { FaCoins, FaGlobe, FaShoppingCart } from "react-icons/fa";
 import { AiFillHdd } from "react-icons/ai";
 import Chart from "./Chart/Chart";
+import PieChart from "./PieCharts/PieCharts";
 import Corousel from "./carousel/Carousel";
 import Link from "next/link";
 import { BsFillPostcardHeartFill } from "react-icons/bs";
@@ -16,7 +17,6 @@ const Dashboard = () => {
   const { recallApi } = useSelector((state: RootState) => state.recallApi);
   const path = "dashboard";
 
-  console.log(dashboard);
   //   // configure
   ActionFeature.path = path;
 
@@ -177,7 +177,11 @@ const Dashboard = () => {
           data={dashboard?.chart?.leads}
           total={dashboard?.total_join + dashboard?.total_hire}
         />
-        <Corousel />
+        <PieChart
+          init={dashboard?.work_total_in_init || 0}
+          progress={dashboard?.work_total_in_progress || 0}
+          Completed={dashboard?.work_total_in_completed || 0}
+        />
       </div>
     </div>
   );

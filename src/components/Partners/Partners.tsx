@@ -279,6 +279,7 @@ const Interaction = () => {
                                     setSelectedWork(item);
                                   }}
                                   className="btn bg-primary bg-gradient"
+                                  data-tooltip="Add Work"
                                 >
                                   <GrUserWorker size="20" color="#fff" />
                                 </button>

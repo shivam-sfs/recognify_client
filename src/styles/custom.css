@@ -478,3 +478,9 @@ p {
   padding: 0 0;
   height: 100%;
 }
+
+
+.carousel-inner.border-radius-lg.h-100 {
+  height: 392px !important;
+  width: 392px !important;
+}

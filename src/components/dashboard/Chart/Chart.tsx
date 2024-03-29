@@ -1,15 +1,11 @@
-import CustomTable, { ActionSwitch } from "@/components/Utils/CustomTable";
+
 import {
   Chart as ChartJS,
-  ArcElement,
-  Tooltip,
-  Legend,
   CategoryScale,
   LinearScale,
   PointElement,
   LineElement,
 } from "chart.js";
-import { DDMMYYYY } from "@/components/Utils/Formeter";
 import { Line } from "react-chartjs-2";
 
 ChartJS.register(CategoryScale, LinearScale, PointElement, LineElement);
