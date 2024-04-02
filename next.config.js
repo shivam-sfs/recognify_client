@@ -15,8 +15,8 @@ module.exports = withPWA({
 const nextConfig = {
   trailingSlash: true,
   output: "export",
-  basePath: "/admin",
-  distDir: "../recognify_backed/admin",
+  basePath: "/dashboard",
+  distDir: "../recognify_backed/public/dashboard",
   eslint: {
     ignoreDuringBuilds: true,
   },
