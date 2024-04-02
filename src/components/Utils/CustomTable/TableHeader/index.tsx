@@ -5,17 +5,18 @@ interface tableHeaderType {
   AddButtonText?: string;
   ExportButtonText?: string;
   disable?: string[];
+  recall?: () => void;
 }
 
-import {setRecallApi} from "@/redux/reducer/RecallApi";
-import {TfiReload} from "react-icons/tfi";
-import {useDispatch} from "react-redux";
+import { setRecallApi } from "@/redux/reducer/RecallApi";
+import { TfiReload } from "react-icons/tfi";
+import { useDispatch } from "react-redux";
 
 const FIRST_BUTTON = "FIRST_BUTTON",
   SECOND_BUTTON = "SECOND_BUTTON",
   RELOAD_BUTTON = "RELOAD_BUTTON";
 
-export {FIRST_BUTTON, SECOND_BUTTON, RELOAD_BUTTON};
+export { FIRST_BUTTON, SECOND_BUTTON, RELOAD_BUTTON };
 
 const TableHeader: React.FC<tableHeaderType> = ({
   onAddClick,
@@ -24,8 +25,9 @@ const TableHeader: React.FC<tableHeaderType> = ({
   AddButtonText = "Add New Record",
   ExportButtonText = "Export CSV",
   disable = [],
+  recall,
 }) => {
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
   return (
     <div>
       <div className="card-header flex-column flex-md-row d-flex justify-content-between align-items-center">
@@ -65,11 +67,18 @@ const TableHeader: React.FC<tableHeaderType> = ({
                 className="ms-1 dt-button  btn btn-light"
                 aria-controls="DataTables_Table_0"
                 type="button"
-                onClick={() => {dispatch(setRecallApi(true))}}
+                onClick={() => {
+                  dispatch(setRecallApi(true));
+                  if (recall) {
+                    recall();
+                  }
+                }}
               >
                 <span>
                   <i className="bx bx-plus me-sm-1"></i>
-                  <span className="d-sm-inline-block"><TfiReload /></span>
+                  <span className="d-sm-inline-block">
+                    <TfiReload />
+                  </span>
                 </span>
               </button>
             ) : null}

@@ -80,9 +80,6 @@ export { FORGOT_PASSWORD_PAGE, OTP_PAGE, CONFIRM_PASSWORD_PAGE }
 
 export const USER_ROLE_TYPE_DATA = {
     "1": "admin",
-    "2": "user",
-    "3": "editor",
-    "4": "broker",
 };
 
 export const USER_ROLE_TYPE_KEY = Object.keys(USER_ROLE_TYPE_DATA)

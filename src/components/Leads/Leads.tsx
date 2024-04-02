@@ -116,6 +116,7 @@ const Leads = () => {
                 ActionFeature.download();
               }}
               disable={[SECOND_BUTTON, FIRST_BUTTON]}
+              recall={()=>{setFilter({...INIT_FILTER})}}
             />
             <Filter
               filter={filter}

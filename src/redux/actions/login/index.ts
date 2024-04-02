@@ -2,6 +2,11 @@ import { setLoader } from "@/redux/reducer/loader"
 import { setToken } from "@/redux/reducer/login"
 import axios from "axios"
 import { Dispatch } from "redux"
+import ShowToast, {
+    errorMessage,
+    error,
+    success,
+} from "../../../components/Utils/ShowToast";
 
 const NEXT_PUBLIC_BASE_URL = process.env.NEXT_PUBLIC_BASE_URL
 
@@ -42,8 +47,9 @@ export const LoginWithCredential = (data: LogCredential) => async (dispatch: Dis
         if (user.status === 200 && user?.data?.success) {
             dispatch(setToken(user?.data?.data))
         }
-    } catch (e) {
+    } catch (e: any) {
         dispatch(setLoader(false))
+        ShowToast(error, e?.response?.data?.message);
     }
 
 }

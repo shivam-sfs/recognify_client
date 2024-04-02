@@ -188,6 +188,7 @@ const Interaction = () => {
               }}
               AddButtonText="New Profile"
               disable={[FIRST_BUTTON]}
+              recall={()=>{setFilter(INIT_FILTER)}}
             />
             <Filter
               filter={filter}
